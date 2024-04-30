@@ -11,6 +11,5 @@ export default async function handler(
   if (!response.ok) res.status(500);
 
   const data = await response.json();
-  console.log(data);
   res.status(200).json(data);
 }

@@ -1,12 +1,19 @@
-# SAUP: Super AwesoMe URL Preview
+# Super Awesome URL Preview
 
 ## Getting Started
 
-First, run the development server:
 
 ```bash
+yarn install &&
 yarn dev
 ```
+
+## Notes
+
+Services that are demoed here:
+
+- https://github.com/rosvik/img.248.no
+- https://github.com/rosvik/og.248.no
 
 ### On built in Image Optimization
 
@@ -17,4 +24,3 @@ https://nextjs.org/docs/pages/building-your-application/optimizing/images#remote
 ### Other image loaders
 
 https://nextjs.org/docs/app/api-reference/next-config-js/images#example-loader-configuration
-

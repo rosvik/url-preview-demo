@@ -25,7 +25,6 @@ export default function Home() {
         let response = await fetch(`/api/ogd?url=${previewUrl.href}`);
         if (!response.ok) return;
         let data = (await response.json()) as OpenGraphData;
-        console.log(data);
         setOgd(data);
       })();
     }
