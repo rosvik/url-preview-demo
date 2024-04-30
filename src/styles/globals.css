@@ -1,4 +1,3 @@
-
 * {
   font-family: "Input Mono", Menlo, monospace;
   color: white;
@@ -27,7 +26,7 @@ a, p, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 0;
 }
-input, select {
+input {
   background-color: #1f2931;
   border: 1px solid gray;
   padding: 1em;
@@ -43,35 +42,4 @@ input:invalid {
 }
 input:focus, select:focus {
   border-color: white;
-}
-input[type="number"] {
-  appearance: textfield;
-}
-input[type="submit"] {
-  margin-top: 2em;
-  width: 100%;
-  text-transform: uppercase;
-  border-color: rgba(242, 151, 24, 0.5);
-  background-color: rgba(242, 151, 24, 0.3);
-}
-input[type="submit"]:focus,
-input[type="submit"]:hover {
-  border-color: rgb(242, 151, 24);
-  background-color: rgba(242, 151, 24, 0.5);
-}
-input[type="submit"]:hover {
-  cursor: pointer;
-}
-input[type="checkbox"] {
-  width: 1.5em;
-  height: 1.5em;
-  margin: 1em;
-  accent-color: white;
-  filter: brightness(95%) contrast(.7) invert(1);
-}
-input[type="checkbox"]:checked {
-  filter: none;
-}
-input[type="checkbox"]:focus {
-  outline: auto;
 }
