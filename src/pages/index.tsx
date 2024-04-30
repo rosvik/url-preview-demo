@@ -16,11 +16,14 @@ export default function Home() {
 
   const title = ogd && ogdGet(ogd, "og:title");
   const description = ogd && ogdGet(ogd, "og:description");
+  const image = ogd && ogdGet(ogd, "og:image");
 
   useEffect(() => {
     if (previewUrl) {
+      setOgd(undefined);
       (async function () {
         let response = await fetch(`/api/ogd?url=${previewUrl.href}`);
+        if (!response.ok) return;
         let data = (await response.json()) as OpenGraphData;
         console.log(data);
         setOgd(data);
@@ -38,12 +41,13 @@ export default function Home() {
         <form
           onSubmit={(e: FormEvent) => {
             e.preventDefault();
-            setPreviewUrl(new URL(input));
+            let urlText = input.startsWith("http") ? input : `https://${input}`;
+            setPreviewUrl(new URL(urlText));
             setInput("");
           }}
         >
           <input
-            type="url"
+            type="text"
             name="url"
             placeholder="https://example.com"
             value={input}
@@ -52,17 +56,18 @@ export default function Home() {
         </form>
         {previewUrl && (
           <div className={styles.urlPreview}>
-            <div className="aside">
-              {/* <Image
-                width={200}
-                height={200}
-                src={``}
-                alt="Preview"
-              /> */}
-            </div>
+            {image && (
+              <Image
+                width={400}
+                height={300}
+                src={image ? image : ""}
+                style={{ objectFit: "contain", maxWidth: "100%" }}
+                alt=""
+              />
+            )}
             <div className={styles.content}>
               <div>
-                <h2>{ogd ? title : previewUrl.host}</h2>
+                <h2>{title ? title : previewUrl.host}</h2>
               </div>
               {description && <p>{description}</p>}
               <Link href={previewUrl.href}>{previewUrl.href}</Link>

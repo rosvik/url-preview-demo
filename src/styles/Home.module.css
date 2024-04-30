@@ -4,10 +4,16 @@
   border-radius: 1rem;
   padding: 2rem;
   display: flex;
+  gap: 2rem;
 }
-.aside {}
 .content {
+  justify-content: center;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+@media (max-width: 850px) {
+  .urlPreview {
+    flex-direction: column;
+  }
 }
