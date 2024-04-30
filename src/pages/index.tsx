@@ -1,12 +1,28 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { OpenGraphData, ogdGet } from "@/utils";
 
 export default function Home() {
   const [input, setInput] = useState("");
   const [previewUrl, setPreviewUrl] = useState<URL>();
+  const [ogd, setOgd] = useState<OpenGraphData>();
+
+  const title = ogd && ogdGet(ogd, "og:title");
+  const description = ogd && ogdGet(ogd, "og:description");
+
+  useEffect(() => {
+    if (previewUrl) {
+      (async function () {
+        let response = await fetch(`/api/ogd?url=${previewUrl.href}`);
+        let data = (await response.json()) as OpenGraphData;
+        console.log(data);
+        setOgd(data);
+      })();
+    }
+  }, [previewUrl]);
 
   return (
     <>
@@ -31,7 +47,7 @@ export default function Home() {
           />
         </form>
         {previewUrl && (
-          <Link href={previewUrl.href} className={styles.urlPreview}>
+          <div className={styles.urlPreview}>
             <div className="aside">
               {/* <Image
                 width={200}
@@ -40,13 +56,14 @@ export default function Home() {
                 alt="Preview"
               /> */}
             </div>
-            <div className="content">
+            <div className={styles.content}>
               <div>
-                <h2>{previewUrl.host}</h2>
+                <h2>{ogd ? title : previewUrl.host}</h2>
               </div>
-              <div>{previewUrl.href}</div>
+              {description && <p>{description}</p>}
+              <Link href={previewUrl.href}>{previewUrl.href}</Link>
             </div>
-          </Link>
+          </div>
         )}
       </main>
     </>
