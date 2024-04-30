@@ -1,9 +1,8 @@
-import { OpenGraphData } from "@/utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<OpenGraphData>
+  res: NextApiResponse
 ) {
   const previewUrl = req.query.url as string;
   if (!previewUrl) return res.status(400);

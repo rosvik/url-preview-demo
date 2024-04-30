@@ -3,7 +3,11 @@ import styles from "@/styles/Home.module.css";
 import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { OpenGraphData, ogdGet } from "@/utils";
+
+export type OpenGraphData = Array<{
+  property: string;
+  content: string;
+}>;
 
 export default function Home() {
   const [input, setInput] = useState("");
@@ -68,4 +72,8 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+function ogdGet(data: OpenGraphData, property: string) {
+  return data.find((o) => o.property == property)?.content;
 }
